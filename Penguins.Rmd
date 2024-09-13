@@ -16,7 +16,7 @@ The Palmer Penguins dataset was made available by Dr. Kristen Gorman and the Pal
 <br>
 
 Let's install and load the Palmer Penguins package.
-```{r}
+```{r, warning=FALSE}
 library(palmerpenguins)
 library(tidyverse)
 view(penguins)
@@ -27,7 +27,7 @@ view(penguins)
 
 Now we are ready to visualize the distribution of a single trait. Let's look at the density distribution of bill sizes among the three species surveyed at Palmer Station.
 
-```{r}
+```{r, warning=FALSE}
 ggplot(penguins) +
   geom_density(mapping = aes(bill_length_mm, fill = species), alpha = 0.5) + 
     facet_wrap(~species, nrow=3)
@@ -35,13 +35,63 @@ ggplot(penguins) +
 
 Let's also see how these traits overlap.
 
-```{r}
+```{r, warning=FALSE}
 ggplot(penguins) +
   geom_density(mapping = aes(bill_length_mm, fill = species), alpha = 0.5)
 ```
-
-
-
-## Relationship between multiple traits
+<br>
 
 ## Sexual dimorphism
+
+Now, let's look at the relationship between multiple traits. Let's find out if any of the surveyed traits are sexually dimorphic. 
+
+Let's look at bill length and depth
+
+```{r, warning=FALSE}
+  ggplot(penguins) +
+  geom_point(mapping = aes(x = bill_length_mm, y=bill_depth_mm, color=sex), size = 1) +
+  facet_wrap(~species)
+
+```
+It appears that Chinstrap penguins have the greatest degree of sexual dimorphism for these traits. 
+
+<br>
+
+Now, let's look at body mass and flipper size.
+
+```{r, warning=FALSE}
+ ggplot(penguins) +
+  geom_point(mapping = aes(x = flipper_length_mm, y = body_mass_g, color=sex), size = 1) +
+  facet_wrap(~species)
+
+```
+It looks like the degree of sexual dimorphism for these traits is highest in Gentoo penguins. 
+
+<br>
+
+Let's simplify how we are visualizing the data, using the example of flipper length. 
+
+```{r, warning=FALSE}
+penguins %>%
+  ggplot(mapping = aes(x=flipper_length_mm, y=sex, color=sex)) +
+  geom_boxplot(outlier.alpha = 0, alpha=0) +
+  geom_jitter(width = 0, size=1) +
+  coord_flip() +
+  facet_wrap(~species)
+```
+
+
+## Multiple Traits
+
+Finally, let's look at the distribution of multiple traits in the surveyed penguins.Let's look at body mass and flipper size by species.
+
+```{r, warning=FALSE}
+ ggplot(penguins) +
+  geom_point(mapping = aes(x = body_mass_g, y = flipper_length_mm, color=species), size = 1)
+```
+
+We are done exploring these data for now! What other relationships can you find between the variables in this data set?
+
+
+
+

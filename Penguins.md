@@ -59,9 +59,6 @@ ggplot(penguins) +
     facet_wrap(~species, nrow=3)
 ```
 
-    ## Warning: Removed 2 rows containing non-finite outside the scale range
-    ## (`stat_density()`).
-
 ![](Penguins_files/figure-gfm/unnamed-chunk-2-1.png)<!-- -->
 
 Let’s also see how these traits overlap.
@@ -71,11 +68,66 @@ ggplot(penguins) +
   geom_density(mapping = aes(bill_length_mm, fill = species), alpha = 0.5)
 ```
 
-    ## Warning: Removed 2 rows containing non-finite outside the scale range
-    ## (`stat_density()`).
-
-![](Penguins_files/figure-gfm/unnamed-chunk-3-1.png)<!-- -->
-
-## Relationship between multiple traits
+![](Penguins_files/figure-gfm/unnamed-chunk-3-1.png)<!-- --> <br>
 
 ## Sexual dimorphism
+
+Now, let’s look at the relationship between multiple traits. Let’s find
+out if any of the surveyed traits are sexually dimorphic.
+
+Let’s look at bill length and depth
+
+``` r
+  ggplot(penguins) +
+  geom_point(mapping = aes(x = bill_length_mm, y=bill_depth_mm, color=sex), size = 1) +
+  facet_wrap(~species)
+```
+
+![](Penguins_files/figure-gfm/unnamed-chunk-4-1.png)<!-- --> It appears
+that Chinstrap penguins have the greatest degree of sexual dimorphism
+for these traits.
+
+<br>
+
+Now, let’s look at body mass and flipper size.
+
+``` r
+ ggplot(penguins) +
+  geom_point(mapping = aes(x = flipper_length_mm, y = body_mass_g, color=sex), size = 1) +
+  facet_wrap(~species)
+```
+
+![](Penguins_files/figure-gfm/unnamed-chunk-5-1.png)<!-- --> It looks
+like the degree of sexual dimorphism for these traits is highest in
+Gentoo penguins.
+
+<br>
+
+Let’s simplify how we are visualizing the data, using the example of
+flipper length.
+
+``` r
+penguins %>%
+  ggplot(mapping = aes(x=flipper_length_mm, y=sex, color=sex)) +
+  geom_boxplot(outlier.alpha = 0, alpha=0) +
+  geom_jitter(width = 0, size=1) +
+  coord_flip() +
+  facet_wrap(~species)
+```
+
+![](Penguins_files/figure-gfm/unnamed-chunk-6-1.png)<!-- -->
+
+## Multiple Traits
+
+Finally, let’s look at the distribution of multiple traits in the
+surveyed penguins.Let’s look at body mass and flipper size by species.
+
+``` r
+ ggplot(penguins) +
+  geom_point(mapping = aes(x = body_mass_g, y = flipper_length_mm, color=species), size = 1)
+```
+
+![](Penguins_files/figure-gfm/unnamed-chunk-7-1.png)<!-- -->
+
+We are done exploring these data for now! What other relationships can
+you find between the variables in this data set?
