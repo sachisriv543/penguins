@@ -45,7 +45,36 @@ library(tidyverse)
 view(penguins)
 ```
 
+<br>
+
 ## Single trait distribution
+
+Now we are ready to visualize the distribution of a single trait. Let’s
+look at the density distribution of bill sizes among the three species
+surveyed at Palmer Station.
+
+``` r
+ggplot(penguins) +
+  geom_density(mapping = aes(bill_length_mm, fill = species), alpha = 0.5) + 
+    facet_wrap(~species, nrow=3)
+```
+
+    ## Warning: Removed 2 rows containing non-finite outside the scale range
+    ## (`stat_density()`).
+
+![](Penguins_files/figure-gfm/unnamed-chunk-2-1.png)<!-- -->
+
+Let’s also see how these traits overlap.
+
+``` r
+ggplot(penguins) +
+  geom_density(mapping = aes(bill_length_mm, fill = species), alpha = 0.5)
+```
+
+    ## Warning: Removed 2 rows containing non-finite outside the scale range
+    ## (`stat_density()`).
+
+![](Penguins_files/figure-gfm/unnamed-chunk-3-1.png)<!-- -->
 
 ## Relationship between multiple traits
 
