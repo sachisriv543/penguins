@@ -13,6 +13,14 @@ The Palmer Penguins dataset was made available by Dr. Kristen Gorman and the Pal
 
 ![These are the three types of penguins observed at Palmer Station.](https://allisonhorst.github.io/palmerpenguins/reference/figures/lter_penguins.png)
 
+<br>
+
+Let's install and load the Palmer Penguins package.
+```{r}
+library(palmerpenguins)
+library(tidyverse)
+view(penguins)
+```
 
 
 ## Single trait distribution
