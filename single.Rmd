@@ -1,5 +1,5 @@
 ---
-title: "Palmer Penguins Data Visualization"
+title: "Single Trait Distribution"
 author: "Sachi Srivastava"
 date: "2024-09-13"
 output: html_document
